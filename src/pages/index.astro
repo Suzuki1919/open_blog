@@ -6,43 +6,514 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+		<style>
+			/* ヒーローセクション */
+			.hero {
+				position: relative;
+				height: 100vh;
+				min-height: 600px;
+				background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+				color: var(--text-light);
+				display: flex;
+				align-items: center;
+				overflow: hidden;
+			}
+
+			.hero::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff10" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+				background-size: cover;
+			}
+
+			.hero-content {
+				position: relative;
+				z-index: 2;
+				text-align: center;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			.team-name {
+				font-size: clamp(3rem, 8vw, 6rem);
+				font-weight: 800;
+				text-transform: uppercase;
+				letter-spacing: 3px;
+				margin-bottom: 1rem;
+				text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+			}
+
+			.team-tagline {
+				font-size: clamp(1.2rem, 3vw, 1.8rem);
+				font-weight: 300;
+				margin-bottom: 2rem;
+				opacity: 0.9;
+			}
+
+			.hero-buttons {
+				display: flex;
+				gap: 1rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			/* 統計セクション */
+			.stats-section {
+				background-color: var(--bg-light);
+				padding: var(--spacing-xl) 0;
+			}
+
+			.stats-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: var(--spacing-md);
+				margin-top: var(--spacing-lg);
+			}
+
+			.stat-card {
+				background: white;
+				padding: var(--spacing-md);
+				border-radius: 8px;
+				text-align: center;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				transition: transform 0.3s ease;
+			}
+
+			.stat-card:hover {
+				transform: translateY(-5px);
+			}
+
+			.stat-number {
+				font-size: 3rem;
+				font-weight: 800;
+				color: var(--accent-color);
+				margin-bottom: 0.5rem;
+			}
+
+			.stat-label {
+				font-size: 1rem;
+				color: var(--text-dark);
+				text-transform: uppercase;
+				letter-spacing: 1px;
+			}
+
+			/* ニュースセクション */
+			.news-section {
+				padding: var(--spacing-xl) 0;
+			}
+
+			.section-title {
+				text-align: center;
+				color: var(--primary-color);
+				margin-bottom: var(--spacing-lg);
+				position: relative;
+			}
+
+			.section-title::after {
+				content: '';
+				position: absolute;
+				bottom: -10px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 80px;
+				height: 4px;
+				background-color: var(--accent-color);
+			}
+
+			.news-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: var(--spacing-md);
+				margin-top: var(--spacing-lg);
+			}
+
+			.news-card {
+				background: white;
+				border-radius: 8px;
+				overflow: hidden;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				transition: transform 0.3s ease;
+			}
+
+			.news-card:hover {
+				transform: translateY(-5px);
+			}
+
+			.news-image {
+				width: 100%;
+				height: 200px;
+				background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+			}
+
+			.news-content {
+				padding: var(--spacing-md);
+			}
+
+			.news-date {
+				color: var(--accent-color);
+				font-size: 0.9rem;
+				font-weight: 600;
+			}
+
+			.news-title {
+				margin: 0.5rem 0;
+				color: var(--primary-color);
+			}
+
+			/* 選手セクション */
+			.players-section {
+				background-color: var(--bg-light);
+				padding: var(--spacing-xl) 0;
+			}
+
+			.players-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+				gap: var(--spacing-md);
+				margin-top: var(--spacing-lg);
+			}
+
+			.player-card {
+				background: white;
+				border-radius: 8px;
+				overflow: hidden;
+				text-align: center;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				transition: all 0.3s ease;
+			}
+
+			.player-card:hover {
+				transform: translateY(-10px);
+				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+			}
+
+			.player-image {
+				width: 100%;
+				height: 300px;
+				background: linear-gradient(to bottom, transparent 0%, rgba(0, 51, 102, 0.8) 100%), 
+							linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+				display: flex;
+				align-items: flex-end;
+				padding: var(--spacing-md);
+			}
+
+			.player-info {
+				width: 100%;
+				color: white;
+				text-align: left;
+			}
+
+			.player-number {
+				font-size: 3rem;
+				font-weight: 800;
+				line-height: 1;
+			}
+
+			.player-name {
+				font-size: 1.2rem;
+				font-weight: 600;
+				margin-top: 0.5rem;
+			}
+
+			.player-position {
+				font-size: 0.9rem;
+				opacity: 0.9;
+			}
+
+			/* スケジュールセクション */
+			.schedule-section {
+				padding: var(--spacing-xl) 0;
+			}
+
+			.schedule-card {
+				background: white;
+				border-radius: 8px;
+				padding: var(--spacing-md);
+				margin-bottom: var(--spacing-sm);
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				transition: all 0.3s ease;
+			}
+
+			.schedule-card:hover {
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+			}
+
+			.match-date {
+				background-color: var(--accent-color);
+				color: white;
+				padding: var(--spacing-sm);
+				border-radius: 4px;
+				text-align: center;
+				min-width: 80px;
+			}
+
+			.match-info {
+				flex: 1;
+				margin: 0 var(--spacing-md);
+			}
+
+			.match-teams {
+				font-size: 1.2rem;
+				font-weight: 600;
+				color: var(--primary-color);
+			}
+
+			.match-venue {
+				color: var(--text-dark);
+				opacity: 0.8;
+			}
+
+			/* フォトギャラリー */
+			.gallery-section {
+				background-color: var(--bg-light);
+				padding: var(--spacing-xl) 0;
+			}
+
+			.gallery-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: var(--spacing-sm);
+				margin-top: var(--spacing-lg);
+			}
+
+			.gallery-item {
+				position: relative;
+				height: 250px;
+				background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+				border-radius: 8px;
+				overflow: hidden;
+				cursor: pointer;
+				transition: transform 0.3s ease;
+			}
+
+			.gallery-item:hover {
+				transform: scale(1.05);
+			}
+
+			/* レスポンシブ */
+			@media (max-width: 768px) {
+				.hero {
+					height: 80vh;
+				}
+
+				.hero-buttons {
+					flex-direction: column;
+					width: 100%;
+					padding: 0 var(--spacing-md);
+				}
+
+				.btn {
+					width: 100%;
+					text-align: center;
+				}
+
+				.stats-grid {
+					grid-template-columns: repeat(2, 1fr);
+				}
+
+				.players-grid {
+					grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+				}
+
+				.schedule-card {
+					flex-direction: column;
+					text-align: center;
+				}
+
+				.match-info {
+					margin: var(--spacing-sm) 0;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<!-- ヒーローセクション -->
+			<section class="hero">
+				<div class="container">
+					<div class="hero-content animate-fadeInUp">
+						<h1 class="team-name">THUNDERS FC</h1>
+						<p class="team-tagline">勝利への情熱、団結の力</p>
+						<div class="hero-buttons">
+							<a href="#schedule" class="btn btn-primary">次の試合</a>
+							<a href="#players" class="btn btn-secondary">選手紹介</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- 統計セクション -->
+			<section class="stats-section">
+				<div class="container">
+					<div class="stats-grid">
+						<div class="stat-card">
+							<div class="stat-number">15</div>
+							<div class="stat-label">今季勝利数</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-number">2位</div>
+							<div class="stat-label">リーグ順位</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-number">42</div>
+							<div class="stat-label">得点</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-number">8</div>
+							<div class="stat-label">連勝記録</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ニュースセクション -->
+			<section class="news-section">
+				<div class="container">
+					<h2 class="section-title">最新ニュース</h2>
+					<div class="news-grid">
+						<article class="news-card">
+							<div class="news-image"></div>
+							<div class="news-content">
+								<p class="news-date">2024.01.15</p>
+								<h3 class="news-title">劇的勝利！延長戦で決勝ゴール</h3>
+								<p>昨日行われたリーグ戦で、延長戦の末に3-2で勝利を収めました。</p>
+							</div>
+						</article>
+						<article class="news-card">
+							<div class="news-image"></div>
+							<div class="news-content">
+								<p class="news-date">2024.01.12</p>
+								<h3 class="news-title">新選手加入のお知らせ</h3>
+								<p>攻撃的MFとして活躍が期待される新選手が加入しました。</p>
+							</div>
+						</article>
+						<article class="news-card">
+							<div class="news-image"></div>
+							<div class="news-content">
+								<p class="news-date">2024.01.10</p>
+								<h3 class="news-title">ユースチーム全国大会出場決定</h3>
+								<p>U-18チームが地区予選を突破し、全国大会への出場が決定しました。</p>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!-- 選手紹介セクション -->
+			<section id="players" class="players-section">
+				<div class="container">
+					<h2 class="section-title">選手紹介</h2>
+					<div class="players-grid">
+						<div class="player-card">
+							<div class="player-image">
+								<div class="player-info">
+									<div class="player-number">10</div>
+									<div class="player-name">山田 太郎</div>
+									<div class="player-position">フォワード</div>
+								</div>
+							</div>
+						</div>
+						<div class="player-card">
+							<div class="player-image">
+								<div class="player-info">
+									<div class="player-number">7</div>
+									<div class="player-name">鈴木 一郎</div>
+									<div class="player-position">ミッドフィルダー</div>
+								</div>
+							</div>
+						</div>
+						<div class="player-card">
+							<div class="player-image">
+								<div class="player-info">
+									<div class="player-number">4</div>
+									<div class="player-name">佐藤 健太</div>
+									<div class="player-position">ディフェンダー</div>
+								</div>
+							</div>
+						</div>
+						<div class="player-card">
+							<div class="player-image">
+								<div class="player-info">
+									<div class="player-number">1</div>
+									<div class="player-name">田中 守</div>
+									<div class="player-position">ゴールキーパー</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- スケジュールセクション -->
+			<section id="schedule" class="schedule-section">
+				<div class="container">
+					<h2 class="section-title">試合スケジュール</h2>
+					<div class="schedule-list">
+						<div class="schedule-card">
+							<div class="match-date">
+								<div>01/20</div>
+								<div>19:00</div>
+							</div>
+							<div class="match-info">
+								<div class="match-teams">THUNDERS FC vs ライオンズ FC</div>
+								<div class="match-venue">ホームスタジアム</div>
+							</div>
+							<a href="#" class="btn btn-primary">チケット購入</a>
+						</div>
+						<div class="schedule-card">
+							<div class="match-date">
+								<div>01/27</div>
+								<div>15:00</div>
+							</div>
+							<div class="match-info">
+								<div class="match-teams">イーグルス FC vs THUNDERS FC</div>
+								<div class="match-venue">アウェイスタジアム</div>
+							</div>
+							<a href="#" class="btn btn-primary">詳細を見る</a>
+						</div>
+						<div class="schedule-card">
+							<div class="match-date">
+								<div>02/03</div>
+								<div>19:00</div>
+							</div>
+							<div class="match-info">
+								<div class="match-teams">THUNDERS FC vs ドラゴンズ FC</div>
+								<div class="match-venue">ホームスタジアム</div>
+							</div>
+							<a href="#" class="btn btn-primary">チケット購入</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- フォトギャラリー -->
+			<section class="gallery-section">
+				<div class="container">
+					<h2 class="section-title">フォトギャラリー</h2>
+					<div class="gallery-grid">
+						<div class="gallery-item"></div>
+						<div class="gallery-item"></div>
+						<div class="gallery-item"></div>
+						<div class="gallery-item"></div>
+						<div class="gallery-item"></div>
+						<div class="gallery-item"></div>
+					</div>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
