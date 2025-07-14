@@ -149,6 +149,17 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				transform: translateY(-5px);
 			}
 
+			.news-link {
+				text-decoration: none;
+				color: inherit;
+				display: block;
+			}
+
+			.news-link:hover .news-card {
+				transform: translateY(-5px);
+				box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+			}
+
 			.news-image {
 				width: 100%;
 				height: 200px;
@@ -338,17 +349,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				}
 			}
 
-			.news-link {
-				text-decoration: none;
-				color: inherit;
-				display: block;
-			}
-
-			.news-link:hover .news-card {
-				transform: translateY(-5px);
-				box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-			}
-
 			.news-link .news-title,
 			.news-link .news-date,
 			.news-link p {
@@ -382,11 +382,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				<div class="container">
 					<div class="stats-grid">
 						<div class="stat-card">
-							<div class="stat-number">45</div>
+							<div class="stat-number">0</div>
 							<div class="stat-label">登録選手数</div>
 						</div>
 						<div class="stat-card">
-							<div class="stat-number">2</div>
+							<div class="stat-number">0</div>
 							<div class="stat-label">クラス数</div>
 						</div>
 						<div class="stat-card">
@@ -406,30 +406,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				<div class="container">
 					<h2 class="section-title">最新ニュース</h2>
 					<div class="news-grid">
-						<article class="news-card">
-							<div class="news-image"></div>
-							<div class="news-content">
-								<p class="news-date">2024.01.15</p>
-								<h3 class="news-title">劇的勝利！延長戦で決勝ゴール</h3>
-								<p>昨日行われたリーグ戦で、延長戦の末に3-2で勝利を収めました。</p>
-							</div>
-						</article>
-						<article class="news-card">
-							<div class="news-image"></div>
-							<div class="news-content">
-								<p class="news-date">2024.01.12</p>
-								<h3 class="news-title">新選手加入のお知らせ</h3>
-								<p>攻撃的MFとして活躍が期待される新選手が加入しました。</p>
-							</div>
-						</article>
-						<article class="news-card">
-							<div class="news-image"></div>
-							<div class="news-content">
-								<p class="news-date">2024.01.10</p>
-								<h3 class="news-title">ユースチーム全国大会出場決定</h3>
-								<p>U-18チームが地区予選を突破し、全国大会への出場が決定しました。</p>
-							</div>
-						</article>
+						<a href="/blog/infinity-establishment/" class="news-link">
+							<article class="news-card">
+								<div class="news-image"></div>
+								<div class="news-content">
+									<p class="news-date">2025.07.14</p>
+									<h3 class="news-title">綱島ドッジボールクラブ「インフィニティ」設立</h3>
+									<p>綱島地域の子供たちのために新しいドッジボールクラブが設立されました。</p>
+								</div>
+							</article>
+						</a>
 					</div>
 				</div>
 			</section>
