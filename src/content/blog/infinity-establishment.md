@@ -1,5 +1,5 @@
 ---
-title: '綱島ドッジボールクラブ　インフィニティ設立'
+title: '綱島ドッジボールクラブ「インフィニティ」設立'
 description: '綱島地域の子供たちのために新しいドッジボールクラブが設立されました'
 pubDate: 'Jul 14 2025'
 heroImage: '../../assets/blog-placeholder-3.jpg'
