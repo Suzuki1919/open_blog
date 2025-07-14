@@ -337,6 +337,27 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 					margin: var(--spacing-sm) 0;
 				}
 			}
+
+			.news-link {
+				text-decoration: none;
+				color: inherit;
+				display: block;
+			}
+
+			.news-link:hover .news-card {
+				transform: translateY(-5px);
+				box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+			}
+
+			.news-link .news-title,
+			.news-link .news-date,
+			.news-link p {
+				color: inherit;
+			}
+
+			.news-link:hover .news-title {
+				color: var(--primary-color);
+			}
 		</style>
 	</head>
 	<body>
