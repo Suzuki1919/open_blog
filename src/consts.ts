@@ -2,5 +2,5 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 export const SITE_TITLE = 'インフィニティ - 公式サイト';
-export const SITE_DESCRIPTION = 'インフィニティの公式ウェブサイト。最新ニュース、試合結果、選手情報、チケット情報をお届けします。';
+export const SITE_DESCRIPTION = '綱島ドッジボールクラブ「インフィニティ」公式ウェブサイト。子供たちの「無限の可能性」を追求し、文武両道を目指すドッジボールクラブです。';
 export const TEAM_NAME = 'インフィニティ';
